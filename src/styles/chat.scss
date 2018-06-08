@@ -1,0 +1,134 @@
+@import 'variables';
+
+.Groopy-chat-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.Groopy-chat-wrapper .Groopy-chat-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: $block-sidebar-width;
+  background: rgba($color-white, .98);
+  box-shadow: 0 0 5px rgba(0,0,0,.1);
+}
+
+.Groopy-chat-wrapper .Groopy-chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Groopy-avatar, .Groopy-avatar img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.Groopy-avatar {
+  box-shadow: 0 0 5px rgba(0,0,0,.1);
+}
+
+.Groopy-user {
+  display: flex;
+  padding: $padding-size;
+  height: $block-user-height;
+  background: $color-grey-light;
+
+  .Groopy-user__title {
+    color: $color-black;
+  }
+
+  .Groopy-user__info {
+    padding-left: $padding-size;
+    color: $color-grey;
+  }
+
+  .Groopy-user__status {
+    font-size: $font-size-small;
+  }
+}
+
+.Groopy-groups {
+  flex: 1;
+
+  .Groopy-group {
+    display: flex;
+    padding: $padding-size;
+    border-bottom: 1px solid $color-grey-light;
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+
+    .Groopy-group__info {
+      padding-left: $padding-size;
+    }
+
+    .Groopy-group__title{
+      color: $color-black;
+      font-size: $font-size-medium;
+      font-weight: bold;
+    }
+    .Groopy-group__type {
+      color: $color-grey;
+      font-size: $font-size-small;
+    }
+  }
+
+  .Groopy-group:hover {
+    background: rgba($color-primary, .2);
+  }
+
+  .Groopy-group--selected, .Groopy-group--selected:hover {
+    background: $color-primary;
+  }
+}
+
+.Groopy-message-board {
+  background: rgba($color-white, .1);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.Groopy-message-board--no-group {
+  flex-direction: row;
+}
+
+.Groopy-message-select {
+  font-size: $font-size-big;
+  color: $color-white;
+  align-self: center;
+  width: 100%;
+  text-align: center;
+}
+
+.Groopy-messages {
+  flex: 1;
+}
+
+.Groopy-text-input {
+  box-shadow: 0 0 5px rgba(0,0,0,.1);
+  padding: $padding-size;
+  height: $block-text-input-height;
+  background: $color-grey-light;
+  .Groopy-text-input .input-group{
+    display: flex;
+  }
+  .Groopy-text-input__text {
+    flex: 1;
+  }
+
+  .Groopy-text-input__button {
+    width: 20%;
+  }
+  .Groopy-btn__send {
+    width: 100%;
+    background: $color-primary;
+    border-color: $color-primary;
+    height: 40px;
+  }
+}
+
+.Groopy-btn__send {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
