@@ -8,10 +8,13 @@ class Currentuser extends Component {
         <Avatar image={this.props.user.avatar} />
         <div className="Groopy-user__info">
           <div className="Groopy-user__title">{this.props.user.name}</div>
-          <div className="Groopy-user__status">Online</div>
+          <div className="Groopy-user__status Groopy-user-status--online ">
+            <span className="Groopy-user-status"></span>
+            Online
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

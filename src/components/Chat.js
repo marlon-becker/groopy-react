@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { setUserGroups, setUserConnections, setUser} from '../actions/user';
-import { joinGroup, leaveGroup, sendMessage, selectGroup, setCurrentMessage} from '../actions/chat';
+import openSocket from 'socket.io-client';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+
+import { setUserGroups, setUserConnections, setUser} from '../actions/user.action';
+import { updateSocket, connectUser, joinGroup, leaveGroup, selectGroup, updateMessages, updateCurrentGroupUsers } from '../actions/chat.action';
 
 import GroupList from './partials/GroupList';
 import Currentuser from './partials/Currentuser';
@@ -10,46 +13,69 @@ import MessageBoard from './MessageBoard';
 
 import '../styles/chat.css';
 
-const api = 'http://localhost:3000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Mjg0NzQxMzEsImRhdGEiOnsiZW1haWwiOiJuZWRAd2ludGVyZmVsbC5jb20ifSwiaWF0IjoxNTI4NDUyNTMxfQ.DijvBEN8zcDmzxgDssaPqBl2BtHEnt9bqAIj919_QF4';
-
 class Chat extends Component {
   componentDidMount() {
-    const user =  axios.get(api+'/users/me', {
-        headers: { 'Authorization': `Bearer ${token}` }
-    }).then(response => this.props.setUser(response.data));
+    const token = this.props.token;
+    const socket = openSocket('http://localhost:3000', {query: `auth_token=${token}`});
 
-    const groups =  axios.get(api+'/users/active-groups', {
+    socket.on('error', function (err) {
+      console.log('received socket error:')
+      console.log(err)
+    });
+
+    socket.on('messages',  (data) => {
+      this.props.updateMessages(data);
+    });
+
+    socket.on('updateGroupUsers', (data) => {
+      this.props.updateCurrentGroupUsers(data);
+    });
+
+    this.props.updateSocket(socket);
+
+    const user =  axios.get(this.props.apiUrl+'/users/me', {
+        headers: { 'Authorization': `Bearer ${token}` }
+    }).then(response => {
+      this.props.setUser(response.data);
+      this.props.connectUser(response.data._id);
+    });
+
+    const groups =  axios.get(this.props.apiUrl+'/users/active-groups', {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then(response => {
       this.props.setUserGroups(response.data);
       response.data.map((group) => {
-        this.props.joinGroup(group._id);
+       this.props.joinGroup(this.props.user._id, group._id);
       })
     });
 
-    const connections =  axios.get(api+'/users/connections', {
+    const connections =  axios.get(this.props.apiUrl+'/users/connections', {
         headers: { 'Authorization': `Bearer ${token}` }
     }).then(response => this.props.setUserConnections(response.data));
   }
 
   render() {
+    if(this.props.token) {
     return (
-      <div className="Groopy-chat-wrapper">
+        <div className="Groopy-chat-wrapper">
           <div className="Groopy-chat-sidebar">
             <Currentuser user={this.props.user} />
             <GroupList groups={this.props.groups} />
           </div>
           <MessageBoard />
-      </div>
-    )
+        </div>
+    );
+  } else { return (<Redirect to="/login" />) }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    apiUrl: state.config.apiUrl,
     groups: state.chat.groups,
     user: state.user.user,
+    token: state.user.token,
+    socket: state.chat.socket,
     connections: state.user.connections,
   }
 }
@@ -59,12 +85,14 @@ const mapDispatchToProps = (dispatch) => {
     setUserGroups: groups => dispatch(setUserGroups(groups)),
     setUserConnections: connections => dispatch(setUserConnections(connections)),
     setUser: user => dispatch(setUser(user)),
-    joinGroup: group => dispatch(joinGroup(group)),
+    connectUser: user => dispatch(connectUser(user)),
+    joinGroup: (userId, groupId) => dispatch(joinGroup(userId, groupId)),
     selectGroup: group => dispatch(selectGroup(group)),
     leaveGroup: group => dispatch(leaveGroup(group)),
-    sendMessage: e => dispatch(sendMessage(e)),
-    setCurrentMessage: e => dispatch(setCurrentMessage(e)),
+    updateSocket: socket => dispatch(updateSocket(socket)),
+    updateMessages: messages => dispatch(updateMessages(messages)),
+    updateCurrentGroupUsers: users => dispatch(updateCurrentGroupUsers(users)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Chat));

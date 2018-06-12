@@ -6,7 +6,7 @@ class GroupList extends Component {
     return (
       <div className="Groopy-groups">
         {this.props.groups.map((group) => {
-          return (<LinkGroup group={group} />)
+          return (<LinkGroup key={group._id} group={group} />)
         })}
       </div>
     )

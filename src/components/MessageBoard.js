@@ -1,32 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ScrollArea from 'react-scrollbar';
+import { Link } from 'react-router-dom';
+
+import { setCurrentMessage, sendMessage, loadMessages } from '../actions/chat.action';
 import Message from './partials/Message';
+import ChatTextInput from './ChatTextInput';
+import UserStatus from './UserStatus';
 
 class MessageBoard extends Component {
 
+  printMessage = (message) => {
+    switch(message.type) {
+      case 'text':
+      return <Message user={this.props.user} text={message} />
+      break
+    }
+  }
   checkGroupSelected = () => {
     if (this.props.currentGroup) {
-    return (
-      <div className="Groopy-message-board">
-        <div className="Groopy-messages"></div>
-        <div className="Groopy-text-input">
-          <div className="input-group">
-            <input onKeyUp={this.props.setCurrentMessage} type="text" className="Groopy-text-input__text form-control" placeholder="Send a message..." aria-label="Input group example" aria-describedby="btnGroupAddon2" />
-            <div className="Groopy-text-input__button input-group-append">
-              <div onClick={this.props.sendMessage} className="input-group-text btn btn-primary Groopy-btn__send" id="btnGroupAddon2">Send</div>
-            </div>
+      return (
+        <div className="Groopy-message-board">
+          <div className="Groopy-message-group-info">
+            {this.props.groupUsers.map((user) => user._id != this.props.user._id ? <UserStatus key={user._id} user={user} /> : '')}
+          </div>
+          <ScrollArea
+            speed={0.8}
+            className="area"
+            contentClassName="Groopy-messages"
+            horizontal={false}
+            >
+            {this.props.messages.map((message) => this.printMessage(message))}
+          </ScrollArea>
+          <ChatTextInput />
+        </div>
+      );
+    } else {
+      return (
+        <div className="Groopy-message-board Groopy-message-board--no-group">
+          <div className="Groopy-message-select">
+            <div>Please select a group!</div>
+            <hr />
+            <button  type="button" className="btn btn-secondary btn-lg">
+              <Link to="/groups/new">Create a new event</Link>
+            </button>
           </div>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="Groopy-message-board Groopy-message-board--no-group">
-        <div class="Groopy-message-select">Please select a group!</div>
-      </div>
-    )
-  }
-
+      )
+    }
   }
 
   render() {
@@ -39,11 +60,16 @@ class MessageBoard extends Component {
 const mapStateToProps = (state) => {
   return {
     currentGroup: state.chat.currentGroup,
+    groupUsers: state.chat.groupUsers,
+    user: state.user.user,
+    messages: state.chat.messages,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setCurrentMessage: e => dispatch(setCurrentMessage(e)),
+    sendMessage: e => dispatch(sendMessage(e)),
   }
 }
 
