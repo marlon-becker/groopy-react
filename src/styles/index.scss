@@ -1,8 +1,41 @@
 @import 'custom_bootstrap';
 @import 'variables';
+@import 'forms';
 
 // Bootstrap library
 @import 'bootstrap/scss/bootstrap';
+
+h1 {
+  font-size: $font-size-very-big;
+  color: $color-primary;
+}
+
+h2 {
+  font-size: $font-size-very-big;
+  color: $color-black;
+}
+
+p {
+  color: black;
+}
+
+label {
+  color: $color-black;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  background-image:
+    linear-gradient(
+      lighten(mix($color-white, $color-secondary, 65), 35),
+      lighten( mix($color-white, $color-secondary, 40), 25),
+    );
+  color: $font-color-default;
+  font-size: $font-size-default;
+}
 
 .Groopy-wrapper {
   display: flex;
@@ -12,23 +45,50 @@
 
 .Groopy-header {
   background: $color-white;
+  display: flex;
   height: $header-height;
-  box-shadow: 0 0 5px rgba(0,0,0,.1)
+  box-shadow: 0 0 10px 2px rgba(darken($color-secondary, 35),.1);
+  flex-direction: row;
+  align-items: center;
+  padding: $padding-size $padding-size * 2;
 }
 
 .Groopy-logo {
-  font-size: $font-size-big;
-  color: $color-black;
-  font-weight: bolder;
-  letter-spacing: -1px;
+  background: url(../images/groopy_logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 160px;
+  height: 40px;
 }
+
+.Groopy-header--options {
+  flex: 1;
+  text-align: right;
+  align-items: center;
+}
+
+.Groopy-header--options ul {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  list-style: none;
+}
+
+.Groopy-header--options li {
+  font-size: $font-size-large;
+  margin-left: $padding-size * 2;
+
+  a {
+    display: block;
+    line-height: 35px;
+    color: $color-grey;
+  }
+}
+
+
+
+
 
 .Groopy-chat-wrapper {
   flex: 1;
-}
-
-body {
-  background: $color-primary;
-  color: $font-color-default;
-  font-size: $font-size-default;
 }

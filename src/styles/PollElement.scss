@@ -1,0 +1,14 @@
+@import 'variables';
+
+.PollElement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .PollElement__title {
+    width: 80%;
+    padding-right: $padding-size;
+  }
+  .Groopy-form__file-upload {
+    width: 60px;
+  }
+}

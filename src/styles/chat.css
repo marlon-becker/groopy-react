@@ -7,7 +7,7 @@
   flex-direction: column;
   width: 250px;
   background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0px 10px 10px 2px rgba(0, 0, 0, 0.1); }
 
 .Groopy-chat-wrapper .Groopy-chat-main {
   flex: 1;
@@ -35,6 +35,34 @@
   .Groopy-user .Groopy-user__status {
     font-size: 10px; }
 
+.Groopy-selected-user {
+  display: flex;
+  padding: 10px;
+  height: 80px;
+  border-bottom: 1px solid rgba(33, 33, 33, 0.1); }
+  .Groopy-selected-user .Groopy-user__title {
+    color: #212121; }
+  .Groopy-selected-user .Groopy-user__info {
+    padding-left: 10px;
+    color: #414141; }
+  .Groopy-selected-user .Groopy-user__status {
+    font-size: 10px; }
+
+.Groopy-user-status-container {
+  margin-right: 8px; }
+
+.Groopy-user-status {
+  background: #edecec;
+  border: 1px solid rgba(33, 33, 33, 0.1);
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  margin-right: 2px; }
+
+.Groopy-user-status--online .Groopy-user-status {
+  background: #00B27D; }
+
 .Groopy-groups {
   flex: 1; }
   .Groopy-groups .Groopy-group {
@@ -42,6 +70,7 @@
     padding: 10px;
     border-bottom: 1px solid #edecec;
     transition: all ease-in-out .2s;
+    position: relative;
     cursor: pointer; }
     .Groopy-groups .Groopy-group .Groopy-group__info {
       padding-left: 10px; }
@@ -49,38 +78,118 @@
       color: #212121;
       font-size: 14px;
       font-weight: bold; }
+    .Groopy-groups .Groopy-group .Groopy-group__actions {
+      position: absolute;
+      top: 5px;
+      right: 5px; }
+      .Groopy-groups .Groopy-group .Groopy-group__actions .btn {
+        padding-left: 3px;
+        opacity: .2; }
+      .Groopy-groups .Groopy-group .Groopy-group__actions .btn:hover {
+        opacity: 1; }
     .Groopy-groups .Groopy-group .Groopy-group__type {
       color: #414141;
       font-size: 10px; }
+    .Groopy-groups .Groopy-group .dropdown {
+      display: none;
+      transition: all ease-in-out .2s; }
   .Groopy-groups .Groopy-group:hover {
-    background: rgba(14, 174, 131, 0.2); }
+    background: rgba(235, 107, 72, 0.2); }
+    .Groopy-groups .Groopy-group:hover .dropdown {
+      display: block; }
   .Groopy-groups .Groopy-group--selected, .Groopy-groups .Groopy-group--selected:hover {
-    background: #0eae83; }
+    background: rgba(235, 107, 72, 0.5);
+    border-bottom: 1px solid rgba(235, 107, 72, 0.3); }
 
-.Groopy-message-board {
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
+.scrollarea {
   flex: 1; }
 
+.Groopy-message-board {
+  background: #fef8f6;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding-top: 90px; }
+
+.Groopy-message-group-info {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  background: #fdede9;
+  color: #414141;
+  padding: 10px;
+  font-size: 10px; }
+
 .Groopy-message-board--no-group {
-  flex-direction: row; }
+  flex-direction: row;
+  background: transparent; }
 
 .Groopy-message-select {
-  font-size: 38px;
+  font-size: 22px;
   color: #fff;
   align-self: center;
   width: 100%;
   text-align: center; }
 
 .Groopy-messages {
-  flex: 1; }
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start; }
+
+.Groopy-message {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  margin-bottom: 10px; }
+  .Groopy-message .Groopy-message__name {
+    color: #fff;
+    margin-bottom: 5px; }
+  .Groopy-message .Groopy-message__content {
+    position: relative;
+    background: rgba(0, 178, 125, 0.5);
+    color: #212121;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    align-content: flex-start; }
+  .Groopy-message .Groopy-message__date {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    color: #00c188; }
+
+.Groopy-message--user {
+  justify-content: flex-end; }
+  .Groopy-message--user .Groopy-message__content {
+    background: rgba(235, 107, 72, 0.5); }
+  .Groopy-message--user .Groopy-message__date {
+    color: #f09076; }
 
 .Groopy-text-input {
+  display: flex;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   height: 60px;
-  background: #edecec; }
+  background: #edecec;
+  height: 60px;
+  line-height: 1;
+  font-size: 14px; }
+  .Groopy-text-input .form-control {
+    height: 40px;
+    line-height: 1;
+    font-size: 14px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0; }
   .Groopy-text-input .Groopy-text-input .input-group {
     display: flex; }
   .Groopy-text-input .Groopy-text-input__text {
@@ -89,9 +198,10 @@
     width: 20%; }
   .Groopy-text-input .Groopy-btn__send {
     width: 100%;
-    background: #0eae83;
-    border-color: #0eae83;
-    height: 40px; }
+    background: #eb6b48;
+    border-color: #eb6b48;
+    height: 40px;
+    margin-top: 0; }
 
 .Groopy-btn__send {
   border-top-left-radius: 0;

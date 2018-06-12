@@ -1,56 +1,63 @@
-import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:3000');
-socket.on('error', function (err) {
-  console.log('received socket error:')
-  console.log(err)
-})
 
 const chatState = {
-  socket,
+  socket: null,
   groups: [],
   messages: [],
+  groupUsers: [],
   currentMessage: '',
   currentGroup: null,
   groups: [],
 }
 
 function chat(state = chatState, action) {
+  console.log(action);
   switch(action.type) {
+    case 'CONNECT_USER':
+      state.socket.emit('connectUser', action.userId);
+      return state;
+    case 'UPDATE_SOCKET':
+      return {
+        ...state,
+        socket: action.socket
+      }
     case 'SET_USER_GROUPS':
       return {
         ...state,
         groups: action.groups
       }
     case 'JOIN_GROUP':
-    state.socket.emit('join', action.group);
-    console.log(action.group);
+    console.log(action.userId, action.groupId, action);
+    state.socket.emit('join', action.userId, action.groupId);
       return {
         ...state
       }
     case 'LEAVE_GROUP':
     state.socket.emit('leave', action.group);
-
     console.log(action.group);
       return {
         ...state
       }
-    case 'SEND_MESSAGE':
-    state.socket.emit('message', state.currentMessage, state.currentGroup);
-    console.log(action);
+    case 'ADD_TO_GROUP_TIMELINE':
+    console.log('ADD_TO_GROUP_TIMELINE');
+    state.socket.emit('addToGroupTimeline', action.message, action.eventType, state.currentGroup);
       return {
         ...state
       }
-    case 'SET_CURRENT_MESSAGE':
-    console.log(action.event.target.value);
-      return {
-        ...state,
-        currentMessage: action.event.target.value
-      }
-    case 'LOAD_MESSAGES':
-      console.log(action)
+    case 'UPDATE_MESSAGES':
       return {
         ...state,
         messages: action.messages
+      }
+    case 'UPDATE_CURRENT_GROUP_USERS':
+    console.log('USER', action.users);
+      return {
+        ...state,
+        groupUsers: action.users
+      }
+    case 'LOG_OUT_CHAT':
+    state.socket.emit('disconnect');
+      return {
+        state
       }
     case 'SELECT_GROUP':
       for(let group in state.groups) {
@@ -61,6 +68,9 @@ function chat(state = chatState, action) {
           state.groups[group].selected = false;
         }
       }
+      state.socket.emit('getCurrentGroupMessages', action.group);
+      state.socket.emit('getCurrentGroupUsers', action.group);
+
       return {
         ...state,
         currentGroup: action.group,

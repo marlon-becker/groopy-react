@@ -1,0 +1,9 @@
+.PollElement {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .PollElement .PollElement__title {
+    width: 80%;
+    padding-right: 10px; }
+  .PollElement .Groopy-form__file-upload {
+    width: 60px; }
