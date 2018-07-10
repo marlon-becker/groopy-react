@@ -1,5 +1,6 @@
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+@import 'variables';
+
+.Groopy-form__post_content {
+  margin-top: $padding-size;
+  text-align: center;
 }

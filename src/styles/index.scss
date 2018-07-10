@@ -1,8 +1,54 @@
 @import 'custom_bootstrap';
 @import 'variables';
+@import 'forms';
 
 // Bootstrap library
 @import 'bootstrap/scss/bootstrap';
+
+*, input, select, textarea, button {
+  font-family: 'Comfortaa', cursive;
+}
+h1 {
+  font-size: $font-size-very-big;
+  color: $color-primary;
+}
+
+h2 {
+  font-size: $font-size-very-big;
+  color: $color-black;
+}
+
+h3 {
+  font-size: $font-size-big;
+  color: $color-black;
+}
+
+h4 {
+  font-size: $font-size-medium;
+  color: $color-black;
+}
+
+p {
+  color: black;
+}
+
+label {
+  color: $color-black;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  background-image:
+    linear-gradient(
+      lighten(mix($color-white, $color-secondary, 65), 35),
+      lighten( mix($color-white, $color-secondary, 40), 25),
+    );
+  color: $font-color-default;
+  font-size: $font-size-default;
+}
 
 .Groopy-wrapper {
   display: flex;
@@ -12,23 +58,120 @@
 
 .Groopy-header {
   background: $color-white;
+  display: flex;
   height: $header-height;
-  box-shadow: 0 0 5px rgba(0,0,0,.1)
+  box-shadow: 0 0 10px 2px rgba(darken($color-secondary, 35),.1);
+  flex-direction: row;
+  align-items: center;
+  padding: $padding-size $padding-size * 2;
 }
 
 .Groopy-logo {
-  font-size: $font-size-big;
-  color: $color-black;
-  font-weight: bolder;
-  letter-spacing: -1px;
+  background: url(../images/groopy_logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 160px;
+  height: 40px;
+}
+
+.Groopy-header--options {
+  flex: 1;
+  text-align: right;
+  align-items: center;
+}
+
+.Groopy-header--options ul {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  list-style: none;
+}
+
+.Groopy-header--options li {
+  font-size: $font-size-large;
+  margin-left: $padding-size * 2;
+
+  a {
+    display: block;
+    line-height: 35px;
+    color: $color-grey;
+  }
 }
 
 .Groopy-chat-wrapper {
   flex: 1;
 }
 
-body {
+.Groopy-splash-page {
+  background: url(../images/splash.png) center 100px;
+  width: 80%;
+  padding-top: 120px;
+  margin: 0 auto;
+  background-size: contain;
+  height: 90vh;
+  background-repeat: no-repeat;
+}
+
+.Groopy-page {
+  padding: $padding-size * 4;
+}
+
+.Groopy-page-header {
+  display: flex;
+  .Groopy-header--actions {
+    text-align: right;
+    flex: 1;
+  }
+
+}
+
+._padd {
+  padding: 0 $padding-size;
+}
+
+._small {
+  font-size: $font-size-medium;
+}
+
+.Group-teams {
+  display: flex;
+}
+
+.Group-team {
+  width: 40%;
+  margin: 0 5%;
+  .Groopy-user--connection {
+    width: 100%;
+  }
+}
+
+.Group-tag {
+  display: inline-block;
+  padding: $padding-size / 2 $padding-size;
+  background: $color-grey;
+  border-radius: $border-radius;
+  font-size: $font-size-small;
+  margin-bottom: $padding-size;
+}
+
+.Group-tag--sport {
   background: $color-primary;
-  color: $font-color-default;
-  font-size: $font-size-default;
+}
+
+.Group-page-title {
+  display: flex;
+
+  .Group-page-title__title {
+    flex: 1;
+  }
+  .Group-page-title__date {
+    font-size: $font-size-medium;
+    background: $color-grey-light;
+    padding: $padding-size;
+    border-radius: $border-radius;
+    text-align: right;
+    width: 175px;
+
+    color: $color-grey;
+  }
 }

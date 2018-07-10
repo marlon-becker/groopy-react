@@ -19,8 +19,24 @@ const setUser = (user) => {
   }
 }
 
+const setToken = (token) => {
+  return {
+    type: 'LOGIN_SUCCESS',
+    token,
+  }
+}
+
+const logOut = (test) => {
+  return {
+    type: 'LOG_OUT',
+    test
+  }
+}
+
 module.exports = {
   setUserGroups,
   setUserConnections,
   setUser,
+  setToken,
+  logOut
 }

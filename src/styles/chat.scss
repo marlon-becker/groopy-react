@@ -10,7 +10,7 @@
   flex-direction: column;
   width: $block-sidebar-width;
   background: rgba($color-white, .98);
-  box-shadow: 0 0 5px rgba(0,0,0,.1);
+  box-shadow: 0px 10px 10px 2px rgba(darken($color-secondary, 35),.1);
 }
 
 .Groopy-chat-wrapper .Groopy-chat-main {
@@ -33,6 +33,40 @@
   padding: $padding-size;
   height: $block-user-height;
   background: $color-grey-light;
+  border-bottom: 1px solid darken($color-grey-light, 2);
+  .Groopy-user__title {
+    color: $color-black;
+  }
+
+  .Groopy-user__info {
+    padding-left: $padding-size;
+    color: $color-grey;
+  }
+
+  .Groopy-user__status {
+    font-size: $font-size-small;
+  }
+}
+.Groopy-connections-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.Groopy-user--connection {
+  background: #fff;
+  width: 28%;
+  margin: $padding-size;
+  box-shadow: 0px 0 10px 2px rgba(darken($color-secondary, 35),.1);
+  border-radius: $border-radius;
+}
+
+.Groopy-selected-user {
+  display: flex;
+  padding: $padding-size;
+  height: $block-user-height;
+  border-bottom: 1px solid rgba($color-black, .1);
 
   .Groopy-user__title {
     color: $color-black;
@@ -48,6 +82,26 @@
   }
 }
 
+.Groopy-user-status-container {
+  margin-right: 8px;
+}
+.Groopy-user-status {
+  background: $color-grey-light;
+  border: 1px solid rgba($color-black, .1);
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  margin-right: 2px;
+}
+.Groopy-user-status--online {
+
+  .Groopy-user-status {
+    background: $color-secondary;
+  }
+
+}
+
 .Groopy-groups {
   flex: 1;
 
@@ -56,6 +110,7 @@
     padding: $padding-size;
     border-bottom: 1px solid $color-grey-light;
     transition: all ease-in-out .2s;
+    position: relative;
     cursor: pointer;
 
     .Groopy-group__info {
@@ -67,30 +122,74 @@
       font-size: $font-size-medium;
       font-weight: bold;
     }
+
+    .Groopy-group__actions {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      .btn {
+        padding-left: 3px;
+        opacity: .2;
+      }
+      .btn:hover {
+        opacity: 1
+      }
+    }
     .Groopy-group__type {
       color: $color-grey;
       font-size: $font-size-small;
+    }
+    .dropdown {
+      display: none;
+      transition: all ease-in-out .2s;
     }
   }
 
   .Groopy-group:hover {
     background: rgba($color-primary, .2);
+    .dropdown {
+      display: block;
+    }
   }
 
   .Groopy-group--selected, .Groopy-group--selected:hover {
-    background: $color-primary;
+    background: rgba($color-primary, .5);
+    border-bottom: 1px solid rgba($color-primary, .3);
   }
 }
 
-.Groopy-message-board {
-  background: rgba($color-white, .1);
-  display: flex;
-  flex-direction: column;
+.scrollarea {
   flex: 1;
 }
 
+.Groopy-message-board {
+  background: mix($color-white, $color-primary, 95);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding-top: 90px;
+}
+
+.Groopy-message-group-info {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  background: mix($color-white, $color-secondary, 85);
+  border-bottom: 1px solid mix($color-white, $color-secondary, 80);
+  color: $color-grey;
+  padding: $padding-size;
+  font-size: $font-size-small;
+}
+
+
 .Groopy-message-board--no-group {
   flex-direction: row;
+  background: transparent;
 }
 
 .Groopy-message-select {
@@ -103,13 +202,75 @@
 
 .Groopy-messages {
   flex: 1;
+  padding: $padding-size;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.Groopy-message {
+  .Groopy-message__name {
+    color: $color-white;
+    margin-bottom: $padding-size / 2;
+  }
+
+  display: flex;
+  justify-content: flex-start;
+  font-size: $font-size-medium;
+  margin-bottom: $padding-size;
+  .Groopy-message__content {
+    position: relative;
+    background: rgba($color-secondary, .5);
+    color: $color-black;
+    border-radius: $border-radius;
+    padding: $padding-size;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    width: 80%;
+    align-content: flex-start;
+  }
+  .Groopy-message__date {
+    position: absolute;
+    top: $padding-size;
+    right: $padding-size;
+    font-size: $font-size-small;
+    color: lighten($color-secondary, 3);
+  }
+}
+
+.Groopy-message-extra {
+  .Groopy-message__content {
+    width: 100%;
+    background: $color-highlight;
+  }
+}
+
+.Groopy-message--user {
+  justify-content: flex-end;
+  .Groopy-message__content {
+    background: rgba($color-primary, .5);
+  }
+  .Groopy-message__date {
+    color: lighten($color-primary, 10);
+  }
 }
 
 .Groopy-text-input {
+  .form-control {
+    height: 40px;
+    line-height: 1;
+    font-size: $font-size-medium;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+  }
+  display: flex;
   box-shadow: 0 0 5px rgba(0,0,0,.1);
   padding: $padding-size;
   height: $block-text-input-height;
   background: $color-grey-light;
+  height: 60px;
+  line-height: 1;
+  font-size: $font-size-medium;
   .Groopy-text-input .input-group{
     display: flex;
   }
@@ -125,10 +286,69 @@
     background: $color-primary;
     border-color: $color-primary;
     height: 40px;
+    margin-top: 0;
   }
 }
 
 .Groopy-btn__send {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+
+.Groopy-search-bar {
+  .form-control {
+    height: 40px;
+    line-height: 1;
+    font-size: $font-size-medium;
+  }
+
+  display: flex;
+  margin: $padding-size 0;
+  height: $block-text-input-height;
+  height: 60px;
+  line-height: 1;
+  font-size: $font-size-medium;
+  .Groopy-text-input .input-group{
+    display: flex;
+  }
+  .Groopy-text-input__text {
+    flex: 1;
+  }
+
+  .Groopy-text-input__button {
+    width: 20%;
+  }
+  .Groopy-btn__send {
+    width: 100%;
+    background: $color-primary;
+    border-color: $color-primary;
+    height: 40px;
+    margin-top: 0;
+  }
+}
+
+.Groopy-message-action {
+  hr {
+    margin-bottom: .5rem;
+  }
+  display: flex;
+  justify-content: flex-end;
+  .btn {
+    font-size: $font-size-medium
+  }
+}
+
+.Groopy-message__info {
+  font-size: $font-size-small;
+}
+
+.Groopy-mini-avatar {
+  display: inline-block;
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: $padding-size / 2;
+  }
 }

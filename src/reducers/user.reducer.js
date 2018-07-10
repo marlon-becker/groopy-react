@@ -3,6 +3,7 @@ const userState = {
   isAuthenticated: false,
   connections: [],
   user: [],
+  token: ''
 }
 
 function user(state = userState, action) {
@@ -17,23 +18,28 @@ function user(state = userState, action) {
         ...state,
         user: action.user
       }
-    case 'LOGIN_REQUEST':
+    case 'LOG_OUT':
       return {
-        isLoggingIn: true, // Show a loading indicator.
-        isAuthenticated: false
+        ...state,
+        isAuthenticated: false, // Dismiss the login view.
+        token: '', // Used in subsequent API requests.
       }
     case 'LOGIN_FAILURE':
       return {
-        isLoggingIn: false,
+        ...state,
         isAuthenticated: false,
         error: action.error
       }
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        token: action.token
+      }
     case 'LOGIN_SUCCESS':
       return {
-        isLoggingIn: false,
+        ...state,
         isAuthenticated: true, // Dismiss the login view.
-        hash: action.hash, // Used in subsequent API requests.
-        user: action.user
+        token: action.token, // Used in subsequent API requests.
       }
     default:
       return state
