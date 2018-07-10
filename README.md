@@ -1,6 +1,7 @@
 # Groopy
 
 > Backend application for Groopy app
+
 > [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 Groopy is an App for creating chat groups for organizing activities. On top of giving users a place to coordinate their activities through the chat, Groopy provides functionality for different categories of events like holidays, sport events or parties. This allows group members to coordinate on dates, check-lists, locations and other things necessary for the event to go smoothly.
