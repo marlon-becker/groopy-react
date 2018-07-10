@@ -27,9 +27,10 @@
     text-decoration: none;
     display: block; }
 
-.Groopy-wrapper .btn-secondary:hover {
+.Groopy-wrapper .btn-primary:hover {
   color: #fff;
-  background: #ee7e5f;
+  border-color: #eb6b48;
+  background: #f3a38d;
   box-shadow: 0px 10px 10px 2px rgba(0, 0, 0, 0.1); }
 
 .Groopy-wrapper .btn-secondary {
@@ -43,7 +44,8 @@
 
 .Groopy-wrapper .btn-secondary:hover {
   color: #fff;
-  background: #00cc8f;
+  background: #00e5a1;
+  border-color: #00cc8f;
   box-shadow: 0px 10px 10px 2px rgba(0, 0, 0, 0.1); }
 
 .Groopy-wrapper .btn-secondary:hover a  {
@@ -71,13 +73,13 @@ button[type=submit] {
 .Groopy-wrapper .form-control {
   border-radius: 5px;
   line-height: 40px;
-  font-size: 22px; }
+  font-size: 18px; }
 
 .react-autosuggest__container {
   position: relative; }
 
 .react-autosuggest__input {
-  font-size: 22px;
+  font-size: 18px;
   line-height: 40px;
   margin-bottom: 10px;
   width: 100%;
@@ -6172,12 +6174,23 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   .hidden-print {
     display: none !important; } }
 
+*, input, select, textarea, button {
+  font-family: 'Comfortaa', cursive; }
+
 h1 {
   font-size: 38px;
   color: #eb6b48; }
 
 h2 {
   font-size: 38px;
+  color: #212121; }
+
+h3 {
+  font-size: 18px;
+  color: #212121; }
+
+h4 {
+  font-size: 14px;
   color: #212121; }
 
 p {
@@ -6192,7 +6205,7 @@ label {
 body {
   background-image: linear-gradient(white, #c8eee3);
   color: #fff;
-  font-size: 18px; }
+  font-size: 16px; }
 
 .Groopy-wrapper {
   display: flex;
@@ -6227,7 +6240,7 @@ body {
   list-style: none; }
 
 .Groopy-header--options li {
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 20px; }
   .Groopy-header--options li a {
     display: block;
@@ -6236,3 +6249,60 @@ body {
 
 .Groopy-chat-wrapper {
   flex: 1; }
+
+.Groopy-splash-page {
+  background: url(../images/splash.png) center 100px;
+  width: 80%;
+  padding-top: 120px;
+  margin: 0 auto;
+  background-size: contain;
+  height: 90vh;
+  background-repeat: no-repeat; }
+
+.Groopy-page {
+  padding: 40px; }
+
+.Groopy-page-header {
+  display: flex; }
+  .Groopy-page-header .Groopy-header--actions {
+    text-align: right;
+    flex: 1; }
+
+._padd {
+  padding: 0 10px; }
+
+._small {
+  font-size: 14px; }
+
+.Group-teams {
+  display: flex; }
+
+.Group-team {
+  width: 40%;
+  margin: 0 5%; }
+  .Group-team .Groopy-user--connection {
+    width: 100%; }
+
+.Group-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #414141;
+  border-radius: 5px;
+  font-size: 10px;
+  margin-bottom: 10px; }
+
+.Group-tag--sport {
+  background: #eb6b48; }
+
+.Group-page-title {
+  display: flex; }
+  .Group-page-title .Group-page-title__title {
+    flex: 1; }
+  .Group-page-title .Group-page-title__date {
+    font-size: 14px;
+    background: #edecec;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: right;
+    width: 175px;
+    color: #414141; }

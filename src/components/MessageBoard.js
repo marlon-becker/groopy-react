@@ -5,16 +5,20 @@ import { Link } from 'react-router-dom';
 
 import { setCurrentMessage, sendMessage, loadMessages } from '../actions/chat.action';
 import Message from './partials/Message';
+import MessagePoll from './partials/MessagePoll';
 import ChatTextInput from './ChatTextInput';
 import UserStatus from './UserStatus';
 
 class MessageBoard extends Component {
 
   printMessage = (message) => {
+    console.log(message);
     switch(message.type) {
       case 'text':
       return <Message user={this.props.user} text={message} />
       break
+      default:
+      return <MessagePoll message={message} />
     }
   }
   checkGroupSelected = () => {

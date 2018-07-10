@@ -4,7 +4,6 @@ class UserStatus extends Component {
 
   getClass() {
     const className = ['Groopy-user-status-container'];
-    console.log(this.props.user);
     if (this.props.user.status === 'connected') {
         className.push('Groopy-user-status--online');
     }

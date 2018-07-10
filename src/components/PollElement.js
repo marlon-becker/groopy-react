@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
-import { axios } from 'axios';
-import { Link } from 'react-router-dom';
 import UploadFile from './UploadFile';
 
 class PollElement extends Component {
@@ -15,7 +12,7 @@ class PollElement extends Component {
             type="text"
             id={`pollTitle_${this.props.pollElementNumber}`}
             className="form-control"
-            placeholder="Title of the option..."
+            placeholder={`Option ${this.props.pollElementNumber}...`}
             required
             autoFocus
             onChange={this.props.handleChange}
@@ -27,7 +24,7 @@ class PollElement extends Component {
         name={`pollTFile_${this.props.pollElementNumber}`}
         {...this.props}
         handleSetImage={this.props.handleSetImage}
-        handleSubmitStatus={this.props.handleSubmitStatus} 
+        handleSubmitStatus={this.props.handleSubmitStatus}
         />
       </div>
     )

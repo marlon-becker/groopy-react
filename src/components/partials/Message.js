@@ -15,8 +15,19 @@ class Message extends Component {
   getName() {
     if(this.props.text._id !== this.props.user._id) {
       return <div className="Groopy-message__name">
+        {this.getAvatar()}
         {this.props.text.name}
       </div>;
+    } else {
+      return '';
+    }
+  }
+
+  getAvatar() {
+    if(this.props.text._id !== this.props.user._id) {
+      return <span class="Groopy-mini-avatar">
+        <img src={this.props.text.avatar} />
+      </span>;
     } else {
       return '';
     }
@@ -31,6 +42,7 @@ class Message extends Component {
     return (
       <div className={this.getClass()}>
         <div className="Groopy-message__content">
+
           {this.getName()}
           <div className="Groopy-message__date">
             {this.getFormattedDate()}

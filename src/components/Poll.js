@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { axios } from 'axios';
 import PollElement from './PollElement';
-import { Link } from 'react-router-dom';
+import { addToGroupTimeLine } from '../actions/chat.action';
 
 import '../styles/PollElement.css';
 
@@ -17,9 +16,10 @@ class Poll extends Component {
   }
 
   setImage = (number, url) => {
-    this.state.imageUrls[number] = url;
+    const imageUrls = this.state.imageUrls;
+    imageUrls[number] = url;
     this.setState({
-      imageUrls: this.state.imageUrls
+      imageUrls: imageUrls
     })
   }
 
@@ -35,15 +35,45 @@ class Poll extends Component {
       initialValues={{
       }}
       onSubmit={(values, actions) => {
-        console.log(values);
-        console.log(this.state.imageUrls);
-        actions.setSubmitting(false);
+        const data = new FormData();
+        const numberOfOptions = 4;
+        data.append('options', numberOfOptions);
+        data.append('groupId', this.props.currentGroup);
+        for (var i = 1; i <= numberOfOptions; i++) {
+          data.append(`pollTitle_${i}`, values[`pollTitle_${i}`]);
+        }
+
+        for(let prop in this.state.imageUrls) {
+          data.append(`pollImage_${prop}`, this.state.imageUrls[prop]);
+        }
+
+        fetch(`${this.props.apiUrl}/polls`, {
+          method: 'POST',
+          headers: new Headers({
+            'Authorization': `Bearer ${this.props.token}`,
+          }),
+          body: data,
+        }).then((response) => {
+          response.json().then((poll) => {
+            if(poll._id) {
+              const newPollData = {
+                poll: poll._id,
+                group: poll.name,
+                userId: this.props.user._id,
+                avatar: this.props.user.avatar
+              };
+              this.props.addToGroupTimeLine(newPollData, 'poll');
+              this.props.history.push('/groups')
+              actions.setSubmitting(false);
+            }
+          });
+        });
       }}
 
       render={props => (
         <div className="Groopy-register Groopy-form">
-        <h2 className="form-signin-heading">Create a new poll</h2>
-        <p>Select the elements for you poll</p>
+        <h2 className="form-signin-heading">What should be the gift?</h2>
+        <p>Please select 4 options</p>
         <form onSubmit={props.handleSubmit}>
           <PollElement handleSubmitStatus={this.setStatus} handleSetImage={this.setImage} pollElementNumber="1" {...props} />
           <PollElement handleSubmitStatus={this.setStatus}  handleSetImage={this.setImage} pollElementNumber="2" {...props} />
@@ -66,14 +96,17 @@ class Poll extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    apiUrl: state.config.apiUrl,
     currentGroup: state.chat.currentGroup,
     user: state.user.user,
-    socket: state.chat.socket
+    socket: state.chat.socket,
+    token: state.user.token
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addToGroupTimeLine: (message, type) => dispatch(addToGroupTimeLine(message, type))
   }
 }
 

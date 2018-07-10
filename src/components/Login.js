@@ -15,7 +15,7 @@ class Login extends Component {
         signIn_password: 'test',
       }}
       onSubmit={(values, actions) => {
-        const connection = axios.get(this.props.apiUrl+'/sign-in', {
+        axios.get(this.props.apiUrl+'/sign-in', {
          auth: {
            username: values.signIn_username,
            password: values.signIn_password

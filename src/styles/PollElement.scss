@@ -1,5 +1,14 @@
 @import 'variables';
 
+.PollVote {
+  margin-top: $padding-size * 4;
+}
+.PollElement--vote{
+  margin-top: $padding-size;
+  margin-bottom: $padding-size;
+  padding-bottom: $padding-size;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+ }
 .PollElement {
   display: flex;
   justify-content: center;
@@ -11,4 +20,24 @@
   .Groopy-form__file-upload {
     width: 60px;
   }
+  .PollElement__title {
+    color: $color-black;
+  }
+  .PollElement__img {
+    width: 80px;
+    text-align: left;
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.PollElement--winner {
+  border: 1px solid $color-primary;
+  border-radius: $border-radius;
+  padding: $padding-size;
+  box-shadow: 0px 10px 10px 2px rgba(darken($color-secondary, 35),.1);
+  background: $color-white;
 }

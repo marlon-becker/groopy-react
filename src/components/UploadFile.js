@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import Dropzone from 'react-dropzone';
 
 class UploadFile extends Component {
 
@@ -65,7 +63,7 @@ class UploadFile extends Component {
     return (
       <div className="Groopy-form__file-upload">
         <input onChange={this.onChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
-        {this.state.imageURL ? <img src={this.state.imageURL} /> : ('')}
+        {this.state.imageURL ? <img alt="Upload image" src={this.state.imageURL} /> : ('')}
         <input
           ref={(ref) => { this.field = ref; }}
           onChange={this.props.handleChange}

@@ -33,7 +33,7 @@
   padding: $padding-size;
   height: $block-user-height;
   background: $color-grey-light;
-
+  border-bottom: 1px solid darken($color-grey-light, 2);
   .Groopy-user__title {
     color: $color-black;
   }
@@ -46,6 +46,20 @@
   .Groopy-user__status {
     font-size: $font-size-small;
   }
+}
+.Groopy-connections-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.Groopy-user--connection {
+  background: #fff;
+  width: 28%;
+  margin: $padding-size;
+  box-shadow: 0px 0 10px 2px rgba(darken($color-secondary, 35),.1);
+  border-radius: $border-radius;
 }
 
 .Groopy-selected-user {
@@ -81,6 +95,7 @@
   margin-right: 2px;
 }
 .Groopy-user-status--online {
+
   .Groopy-user-status {
     background: $color-secondary;
   }
@@ -164,7 +179,8 @@
   left: 0;
   height: 80px;
   width: 100%;
-  background: lighten($color-primary, 35);
+  background: mix($color-white, $color-secondary, 85);
+  border-bottom: 1px solid mix($color-white, $color-secondary, 80);
   color: $color-grey;
   padding: $padding-size;
   font-size: $font-size-small;
@@ -214,10 +230,17 @@
   }
   .Groopy-message__date {
     position: absolute;
-    top: $padding-size / 2;
-    right: $padding-size / 2;
+    top: $padding-size;
+    right: $padding-size;
     font-size: $font-size-small;
     color: lighten($color-secondary, 3);
+  }
+}
+
+.Groopy-message-extra {
+  .Groopy-message__content {
+    width: 100%;
+    background: $color-highlight;
   }
 }
 
@@ -270,4 +293,62 @@
 .Groopy-btn__send {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+
+.Groopy-search-bar {
+  .form-control {
+    height: 40px;
+    line-height: 1;
+    font-size: $font-size-medium;
+  }
+
+  display: flex;
+  margin: $padding-size 0;
+  height: $block-text-input-height;
+  height: 60px;
+  line-height: 1;
+  font-size: $font-size-medium;
+  .Groopy-text-input .input-group{
+    display: flex;
+  }
+  .Groopy-text-input__text {
+    flex: 1;
+  }
+
+  .Groopy-text-input__button {
+    width: 20%;
+  }
+  .Groopy-btn__send {
+    width: 100%;
+    background: $color-primary;
+    border-color: $color-primary;
+    height: 40px;
+    margin-top: 0;
+  }
+}
+
+.Groopy-message-action {
+  hr {
+    margin-bottom: .5rem;
+  }
+  display: flex;
+  justify-content: flex-end;
+  .btn {
+    font-size: $font-size-medium
+  }
+}
+
+.Groopy-message__info {
+  font-size: $font-size-small;
+}
+
+.Groopy-mini-avatar {
+  display: inline-block;
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: $padding-size / 2;
+  }
 }

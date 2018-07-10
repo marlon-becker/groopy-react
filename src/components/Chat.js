@@ -23,7 +23,7 @@ class Chat extends Component {
       console.log(err)
     });
 
-    socket.on('messages',  (data) => {
+    socket.on('messages', (data) => {
       this.props.updateMessages(data);
     });
 
@@ -33,23 +33,23 @@ class Chat extends Component {
 
     this.props.updateSocket(socket);
 
-    const user =  axios.get(this.props.apiUrl+'/users/me', {
+    axios.get(this.props.apiUrl+'/users/me', {
         headers: { 'Authorization': `Bearer ${token}` }
     }).then(response => {
       this.props.setUser(response.data);
       this.props.connectUser(response.data._id);
     });
 
-    const groups =  axios.get(this.props.apiUrl+'/users/active-groups', {
+    axios.get(this.props.apiUrl+'/users/active-groups', {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then(response => {
       this.props.setUserGroups(response.data);
       response.data.map((group) => {
-       this.props.joinGroup(this.props.user._id, group._id);
+       return this.props.joinGroup(this.props.user._id, group._id);
       })
     });
 
-    const connections =  axios.get(this.props.apiUrl+'/users/connections', {
+    axios.get(this.props.apiUrl+'/users/connections', {
         headers: { 'Authorization': `Bearer ${token}` }
     }).then(response => this.props.setUserConnections(response.data));
   }

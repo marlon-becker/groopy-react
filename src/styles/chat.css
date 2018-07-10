@@ -26,7 +26,8 @@
   display: flex;
   padding: 10px;
   height: 80px;
-  background: #edecec; }
+  background: #edecec;
+  border-bottom: 1px solid #e8e7e7; }
   .Groopy-user .Groopy-user__title {
     color: #212121; }
   .Groopy-user .Groopy-user__info {
@@ -34,6 +35,19 @@
     color: #414141; }
   .Groopy-user .Groopy-user__status {
     font-size: 10px; }
+
+.Groopy-connections-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center; }
+
+.Groopy-user--connection {
+  background: #fff;
+  width: 28%;
+  margin: 10px;
+  box-shadow: 0px 0 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px; }
 
 .Groopy-selected-user {
   display: flex;
@@ -120,7 +134,8 @@
   left: 0;
   height: 80px;
   width: 100%;
-  background: #fdede9;
+  background: #d9f3ec;
+  border-bottom: 1px solid #ccf0e5;
   color: #414141;
   padding: 10px;
   font-size: 10px; }
@@ -130,7 +145,7 @@
   background: transparent; }
 
 .Groopy-message-select {
-  font-size: 22px;
+  font-size: 18px;
   color: #fff;
   align-self: center;
   width: 100%;
@@ -162,10 +177,14 @@
     align-content: flex-start; }
   .Groopy-message .Groopy-message__date {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
     font-size: 10px;
     color: #00c188; }
+
+.Groopy-message-extra .Groopy-message__content {
+  width: 100%;
+  background: #fffecf; }
 
 .Groopy-message--user {
   justify-content: flex-end; }
@@ -206,3 +225,46 @@
 .Groopy-btn__send {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
+
+.Groopy-search-bar {
+  display: flex;
+  margin: 10px 0;
+  height: 60px;
+  height: 60px;
+  line-height: 1;
+  font-size: 14px; }
+  .Groopy-search-bar .form-control {
+    height: 40px;
+    line-height: 1;
+    font-size: 14px; }
+  .Groopy-search-bar .Groopy-text-input .input-group {
+    display: flex; }
+  .Groopy-search-bar .Groopy-text-input__text {
+    flex: 1; }
+  .Groopy-search-bar .Groopy-text-input__button {
+    width: 20%; }
+  .Groopy-search-bar .Groopy-btn__send {
+    width: 100%;
+    background: #eb6b48;
+    border-color: #eb6b48;
+    height: 40px;
+    margin-top: 0; }
+
+.Groopy-message-action {
+  display: flex;
+  justify-content: flex-end; }
+  .Groopy-message-action hr {
+    margin-bottom: .5rem; }
+  .Groopy-message-action .btn {
+    font-size: 14px; }
+
+.Groopy-message__info {
+  font-size: 10px; }
+
+.Groopy-mini-avatar {
+  display: inline-block; }
+  .Groopy-mini-avatar img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px; }

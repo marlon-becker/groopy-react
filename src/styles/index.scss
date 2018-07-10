@@ -5,6 +5,9 @@
 // Bootstrap library
 @import 'bootstrap/scss/bootstrap';
 
+*, input, select, textarea, button {
+  font-family: 'Comfortaa', cursive;
+}
 h1 {
   font-size: $font-size-very-big;
   color: $color-primary;
@@ -12,6 +15,16 @@ h1 {
 
 h2 {
   font-size: $font-size-very-big;
+  color: $color-black;
+}
+
+h3 {
+  font-size: $font-size-big;
+  color: $color-black;
+}
+
+h4 {
+  font-size: $font-size-medium;
   color: $color-black;
 }
 
@@ -85,10 +98,80 @@ body {
   }
 }
 
-
-
-
-
 .Groopy-chat-wrapper {
   flex: 1;
+}
+
+.Groopy-splash-page {
+  background: url(../images/splash.png) center 100px;
+  width: 80%;
+  padding-top: 120px;
+  margin: 0 auto;
+  background-size: contain;
+  height: 90vh;
+  background-repeat: no-repeat;
+}
+
+.Groopy-page {
+  padding: $padding-size * 4;
+}
+
+.Groopy-page-header {
+  display: flex;
+  .Groopy-header--actions {
+    text-align: right;
+    flex: 1;
+  }
+
+}
+
+._padd {
+  padding: 0 $padding-size;
+}
+
+._small {
+  font-size: $font-size-medium;
+}
+
+.Group-teams {
+  display: flex;
+}
+
+.Group-team {
+  width: 40%;
+  margin: 0 5%;
+  .Groopy-user--connection {
+    width: 100%;
+  }
+}
+
+.Group-tag {
+  display: inline-block;
+  padding: $padding-size / 2 $padding-size;
+  background: $color-grey;
+  border-radius: $border-radius;
+  font-size: $font-size-small;
+  margin-bottom: $padding-size;
+}
+
+.Group-tag--sport {
+  background: $color-primary;
+}
+
+.Group-page-title {
+  display: flex;
+
+  .Group-page-title__title {
+    flex: 1;
+  }
+  .Group-page-title__date {
+    font-size: $font-size-medium;
+    background: $color-grey-light;
+    padding: $padding-size;
+    border-radius: $border-radius;
+    text-align: right;
+    width: 175px;
+
+    color: $color-grey;
+  }
 }

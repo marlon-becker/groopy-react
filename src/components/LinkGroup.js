@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from './partials/Avatar';
 import { Link } from 'react-router-dom';
-import { selectGroup, updateMessages } from '../actions/chat.action';
+import { selectGroup } from '../actions/chat.action';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
@@ -52,6 +52,7 @@ class LinkGroup extends Component {
         options.push({'text': 'Grocery list', 'url': '/plugin/groceries'});
         options.push({'text': 'Expenses division', 'url': '/plugin/expenses'});
       break;
+      default:
     }
     options.push({'text': 'Add friends', 'url': '/groups/connections'});
     return (options.map((option) => <DropdownItem>
@@ -60,7 +61,7 @@ class LinkGroup extends Component {
   }
 
   render() {
-    const { name, status, type } = this.props.group;
+    const { name, status, type, _id } = this.props.group;
     return (
       <div onClick={this.selectGroup} className={this.getClass()}>
         {this.renderAvatar()}
@@ -72,7 +73,7 @@ class LinkGroup extends Component {
               <DropdownToggle caret color="light">
               </DropdownToggle>
               <DropdownMenu >
-                <DropdownItem><Link to="/groups/status">Group information</Link></DropdownItem>
+                <DropdownItem><Link to={`/group/${_id}`}>Group information</Link></DropdownItem>
                 <DropdownItem divider />
                 {this.getGroupTypeActions()}
                 <DropdownItem divider />

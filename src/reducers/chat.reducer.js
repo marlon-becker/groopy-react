@@ -10,7 +10,6 @@ const chatState = {
 }
 
 function chat(state = chatState, action) {
-  console.log(action);
   switch(action.type) {
     case 'CONNECT_USER':
       state.socket.emit('connectUser', action.userId);
@@ -26,19 +25,16 @@ function chat(state = chatState, action) {
         groups: action.groups
       }
     case 'JOIN_GROUP':
-    console.log(action.userId, action.groupId, action);
     state.socket.emit('join', action.userId, action.groupId);
       return {
         ...state
       }
     case 'LEAVE_GROUP':
     state.socket.emit('leave', action.group);
-    console.log(action.group);
       return {
         ...state
       }
     case 'ADD_TO_GROUP_TIMELINE':
-    console.log('ADD_TO_GROUP_TIMELINE');
     state.socket.emit('addToGroupTimeline', action.message, action.eventType, state.currentGroup);
       return {
         ...state
@@ -49,7 +45,6 @@ function chat(state = chatState, action) {
         messages: action.messages
       }
     case 'UPDATE_CURRENT_GROUP_USERS':
-    console.log('USER', action.users);
       return {
         ...state,
         groupUsers: action.users

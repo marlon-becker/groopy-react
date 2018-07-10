@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import axios from 'axios';
 import UserCard from './UserCard';
+import UploadFile from './UploadFile';
 import Avatar from './partials/Avatar'
 
 
@@ -36,19 +37,18 @@ class CreateGroup extends Component {
     // and they are initially empty because the Autosuggest is closed.
     this.state = {
       value: '',
+      imageUrl: '',
       suggestions: [],
       users: [],
-      selectedUsers: []
+      selectedUsers: [],
+      submitAllowed: false
     };
-
-
   }
 
   componentDidMount() {
     axios.get(this.props.apiUrl+'/users/connections', {
         headers: { 'Authorization': `Bearer ${this.props.token}` }
      }).then(response => {
-
        this.setState({
          users: response.data ? response.data : []
        });
@@ -117,6 +117,19 @@ class CreateGroup extends Component {
      });
   }
 
+
+  setStatus = (allow) => {
+    this.setState({
+      submitAllowed: allow
+    })
+  }
+
+  setImage = (number, url) => {
+    this.setState({
+      imageUrl: url
+    })
+  }
+
   render() {
     const { value, suggestions } = this.state;
 
@@ -136,6 +149,7 @@ class CreateGroup extends Component {
           bodyFormData.set('name', values.createEvent_Title);
           bodyFormData.set('description', values.createEvent_Description);
           bodyFormData.set('type', values.createEvent_Type);
+          bodyFormData.set('image', this.state.imageUrl);
           bodyFormData.set('users', this.state.selectedUsers.reduce((acc, user) => {
             acc.push(user._id);
             return acc;
@@ -194,10 +208,16 @@ class CreateGroup extends Component {
             />
 
             <hr />
+            <label>Upload a photo</label>
+            <UploadFile handleSubmitStatus={this.setStatus}
+            name="groupImage"
+            {...this.props}
+            handleSetImage={this.setImage}
+            />
+            <hr />
             <label>Event members</label>
 
             <Autosuggest
-
               shouldRenderSuggestions={() => true}
               suggestions={suggestions}
               onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}

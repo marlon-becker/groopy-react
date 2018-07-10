@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Login from './components/Login';
 import Chat from './components/Chat';
-import Root from './components/Root';
 import Poll from './components/Poll';
+import GroupInfo from './components/GroupInfo';
+import Connections from './components/Connections';
+import PollVote from './components/PollVote';
+import SplashPage from './components/SplashPage';
 import Register from './components/Register';
 import CreateGroup from './components/CreateGroup';
 
@@ -33,8 +36,23 @@ const routes = [
     auth: true
   },
   {
+    path: "/group/:id",
+    component: GroupInfo,
+    auth: true
+  },
+  {
     path: "/plugin/add-poll",
     component: Poll,
+    auth: true
+  },
+  {
+    path: "/polls/:id",
+    component: PollVote,
+    auth: true
+  },
+  {
+    path: "/connections",
+    component: Connections,
     auth: true
   },
 ];
@@ -57,6 +75,7 @@ class App extends Component {
         <div className="Groopy-wrapper">
           <Header />
           <Switch>
+            <Route exact path="/" component={SplashPage} />
             {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
           </Switch>
         </div>

@@ -36,7 +36,8 @@ class Header extends Component {
     } else {
       return (
         <ul>
-        <li><Link to="/groups">My groups</Link></li>
+          <li><Link to="/groups">My events</Link></li>
+          <li><Link to="/connections">Connections</Link></li>
           <li><Link to="/groups/new">Create new event</Link></li>
           <li><button onClick={this.logout} className="btn btn-secondary">logout</button></li>
         </ul>
