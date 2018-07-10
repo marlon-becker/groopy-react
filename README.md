@@ -67,4 +67,4 @@ npm start
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/marlonbs/groopy-backend/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/marlonbs/groopy-react/blob/master/LICENSE) file for details
